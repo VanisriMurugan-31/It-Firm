@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import ReactPlayer from "react-player";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import ResponsiveSlider from "../Layouts/Card";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const imgStyle = {
@@ -334,12 +336,13 @@ function Main() {
         <h4>Career</h4>
         <hr />
         <p>Build a future you believe in</p>
+        <ResponsiveSlider />
         <button
           type="submit"
           className="btn btn-primary px-4 py-2"
           style={{ borderRadius: "50px 20px" }}
         >
-          Apply Now{" "}
+          <Link to='/career' style={{color:"white",textDecoration:"none"}}>Apply Now{" "}</Link>
         </button>
       </div>
     </>
