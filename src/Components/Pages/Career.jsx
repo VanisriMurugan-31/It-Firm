@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Baseurl from "../../Hooks/useLocalStorage";
 
 function Career() {
   const [data, setData] = useState({
@@ -17,14 +18,13 @@ function Career() {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const [roleData, setRoleData] = useState([]);
+ const [successMessage, setSuccessMessage] = useState("");
 
   const fetchData = async () => {
     try {
-      const url = `https://api.sheetbest.com/sheets/a1fbb418-52e4-4dec-a5dd-144237536005`;
+      const url = Baseurl;
       const response = await fetch(url);
       const res = await response.json();
-      console.log(res, "vanisri");
       return res; // Returns an array of values
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -35,7 +35,7 @@ function Career() {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://api.sheetbest.com/sheets/a1fbb418-52e4-4dec-a5dd-144237536005",
+        Baseurl,
         {
           method: "POST",
           headers: {
@@ -46,6 +46,7 @@ function Career() {
       );
 
       if (response.ok) {
+        setSuccessMessage("Data submitted successfully!");
         console.log("Data submitted successfully!");
       } else {
         console.error("Failed to submit data.");
@@ -58,12 +59,13 @@ function Career() {
   useEffect(() => {
     fetchData().then(setData);
   }, []);
+  
 
   return (
     <div>
       <div className="container text-center py-4">
         <h3>Career</h3>
-
+        <h6 className="text-info">Number Application Recevied {data.length} </h6>
         <span>
           <i className="fa-solid fa-home" style={{ color: "#3f3f79" }}></i>
           &nbsp;
@@ -91,7 +93,6 @@ function Career() {
               required
             />
           </div>
-
           {/* Last Name */}
           <div className="col-md-6">
             <label htmlFor="lname" className="form-label">
@@ -152,6 +153,7 @@ function Career() {
               id="cars"
               onChange={handleChange}
             >
+               <option value="">Select</option>
               <option value="FrontEnd Developer">FrontEnd Developer</option>
               <option value="BcankEnd Developer">BcankEnd Developer</option>
               <option value="FullStack Developer">FullStack Developer</option>
@@ -163,12 +165,11 @@ function Career() {
               Years of Experiance{" "}
             </label>
             <input
-              type="tel"
+              type="Number"
               id="phone"
               name="Years"
               value={data.Years}
               className="form-control"
-              placeholder="Your phone number"
               onChange={handleChange}
               required
             />
@@ -202,6 +203,7 @@ function Career() {
             </button>
           </div>
         </form>
+        {successMessage && <p style={{ color: "green", fontWeight: "bold" }}>{successMessage}</p>}
       </div>
     </div>
   );

@@ -42,7 +42,6 @@ function Header() {
         aria-controls="basic-navbar-nav"
         style={{ marginRight: "20px" }}
       />
-
       {/* Navigation Links */}
       <Navbar.Collapse id="basic-navbar-nav" style={{ marginLeft: "30px" }}>
         <Nav className="section">
@@ -51,9 +50,6 @@ function Header() {
           </Nav.Link>
           <Nav.Link href="/career" className="text-white">
             Career
-          </Nav.Link>
-          <Nav.Link href="#" className="text-white">
-            Our Services
           </Nav.Link>
           <Nav.Link href="/contact" className="text-white">
             Contact

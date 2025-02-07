@@ -1,35 +1,27 @@
-
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
+import Baseurl from "../../Hooks/useLocalStorage";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-
-
-
-
 const ResponsiveSlider = () => {
+  const [data, setData] = useState([]);
+  const fetchData = async () => {
+    try {
+      const url = Baseurl;
+      const response = await fetch(url);
+      const res = await response.json();
+      setData(res);
+      return res; // Returns an array of values
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return [];
+    }
+  };
 
-
-
-    const[data,setData]=useState([]);
-    const fetchData = async () => {
-        try {
-          const url = `https://api.sheetbest.com/sheets/a1fbb418-52e4-4dec-a5dd-144237536005`;
-          const response = await fetch(url);
-          const res = await response.json();
-          setData(res);
-          console.log(res, "sri");
-          return res; // Returns an array of values
-        } catch (error) {
-          console.error("Error fetching data:", error);
-          return [];
-        }
-      };
-    
-      useEffect(() => {
-          fetchData().then(setData);
-        }, []);
+  useEffect(() => {
+    fetchData().then(setData);
+  }, []);
   const settings = {
     dots: true,
     infinite: true,
@@ -65,7 +57,7 @@ const ResponsiveSlider = () => {
           <div key={card.id} style={{ padding: "15px" }}>
             <div
               style={{
-                background: card.bgColor,
+                background: "#3f3f79",
                 padding: "20px",
                 borderRadius: "15px",
                 textAlign: "center",
@@ -78,13 +70,18 @@ const ResponsiveSlider = () => {
                 margin: "0 10px",
               }}
             >
-             
-              
               {/* Title */}
-              <h3 style={{ fontSize: "22px", margin: "10px 0" }}>{card.title}</h3>
-              
+              <h3 style={{ fontSize: "22px", margin: "10px 0" }}>
+                {card.title}
+              </h3>
               {/* Content */}
-              <p style={{ fontSize: "16px", fontWeight: "normal", margin: "0 10px" }}>
+              <p
+                style={{
+                  fontSize: "16px",
+                  fontWeight: "normal",
+                  margin: "0 10px",
+                }}
+              >
                 {card.content}
               </p>
             </div>

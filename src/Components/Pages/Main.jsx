@@ -88,11 +88,6 @@ function Main() {
           padding: "30px 10px ",
           backgroundColor: "#3f3f79",
           width: "100%", // Ensures full width
-          // minHeight: "80vh",
-          // // display: "flex",
-          // // flexDirection: "column",
-          // // alignItems: "center",
-          // // justifyContent: "center",
         }}
       >
         <h2 style={{ color: "white" }}>
@@ -259,7 +254,7 @@ function Main() {
             <ReactPlayer
               width={"100%"}
               height="100%"
-              url="https://www.cisco.com/content/dam/cisco-cdc/site/images/poster-image/explainer-544x306.png"
+              url="/Assets/videoplayback.mp4"
               playing={true}
               muted={true}
               controls={true}
@@ -331,11 +326,12 @@ function Main() {
       </div>
       <div
         className="container"
-        style={{ border: "none", padding: "30px 10px " }}
+        style={{ border: "none", padding: "50px 10px " }}
       >
-        <h4>Career</h4>
+        <h2><i>Career</i></h2>
+       
         <hr />
-        <p>Build a future you believe in</p>
+        <h3 className="text text-info">Build a future you believe in</h3>
         <ResponsiveSlider />
         <button
           type="submit"
